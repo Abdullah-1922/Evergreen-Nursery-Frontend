@@ -1,0 +1,93 @@
+
+  .btn-main {
+    height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 30px;
+    border: 4px solid;
+    border-color: transparent;
+    font-size: 16px;
+
+    background-color: inherit;
+    border-radius: 100px;
+    font-weight: 700;
+    color:  #000000;
+    box-shadow: 0 0 0 2px #4d6429;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .btn-main svg {
+    position: absolute;
+    width: 24px;
+    fill: #4d6429;
+    z-index: 9;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .btn-main .arr-1 {
+    right: 16px;
+  }
+  
+  .btn-main .arr-2 {
+    left: -25%;
+  }
+  
+  .btn-main .circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: #4d6429;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .btn-main .text {
+    position: relative;
+    z-index: 1;
+    transform: translateX(-12px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .btn-main:hover {
+    box-shadow: 0 0 0 12px transparent;
+    color: #ebe5e5;
+    border-radius: 12px;
+    height: 50px;
+  }
+  
+  .btn-main:hover .arr-1 {
+    right: -25%;
+  }
+  
+  .btn-main:hover .arr-2 {
+    left: 16px;
+  }
+  
+  .btn-main:hover .text {
+    transform: translateX(12px);
+  }
+  
+  .btn-main:hover svg {
+    fill: #fff3f3;
+  }
+  
+  .btn-main:active {
+    scale: 0.95;
+    box-shadow: 0 0 0 4px #4d6429;
+  }
+  
+  .btn-main:hover .circle {
+    width: 220px;
+    height: 220px;
+    opacity: 1;
+  }
+  
+  
