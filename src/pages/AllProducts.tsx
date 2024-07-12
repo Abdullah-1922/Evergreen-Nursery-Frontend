@@ -3,7 +3,7 @@ import "../styles/layoutMenu.css";
 import Navbar from "../components/ui/navbar/Navbar";
 import { useGetProductsQuery } from "../redux/api/baseApi";
 import Sidebar from "../components/ui/sidebar/AllProductSidebar";
-import Card, { TItem } from "../components/ui/card/card";
+import Card, { TItem } from "../components/ui/card/Card";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../redux/hooks";
 import PaginationTool from "../components/ui/pagination/Pagination";
@@ -20,9 +20,6 @@ const AllProducts = () => {
 
   const paginateInfo = useAppSelector((state) => state.paginateSlice);
 
-
-  
-  
   useEffect(() => {
     const params = new URLSearchParams();
     //check max price
@@ -65,7 +62,7 @@ const AllProducts = () => {
     params.append("page", paginateInfo.page.toString());
     params.append("limit", paginateInfo.limit.toString());
     setQuery(params.toString());
-  }, [maxPrice, minPrice, isStock, priceSerial, category,paginateInfo]);
+  }, [maxPrice, minPrice, isStock, priceSerial, category, paginateInfo]);
 
   const { data } = useGetProductsQuery(query);
 
@@ -86,14 +83,15 @@ const AllProducts = () => {
         <Layout>
           <Navbar />
 
-          <Content className="" style={{ backgroundColor: "white" }}>
+          <Content  style={{ backgroundColor: "white" }}>
             <div
+            className="p-[10px] md:p-[25px] lg:p-[40px]"
               style={{
-                padding: 24,
+                // padding: 48,
               }}
             >
               {data?.data.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 xl:grid-cols-3 ">
                   {data?.data?.map((item: TItem, ind: number) => (
                     <Card key={ind} item={item} />
                   ))}
@@ -108,8 +106,7 @@ const AllProducts = () => {
               )}
             </div>
             <div className="w-fit mx-auto pb-10">
-
-            <PaginationTool totalPage={data?.meta?.total}/>
+              <PaginationTool totalPage={data?.meta?.total} />
             </div>
           </Content>
         </Layout>

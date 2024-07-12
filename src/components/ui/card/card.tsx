@@ -1,31 +1,15 @@
-// const Card = () => {
-//   return (
-//     <div className="m-2 group px-10 py-5 bg-white/10 rounded-lg flex flex-col items-center justify-center gap-2 relative after:absolute after:h-full after:bg-[#abd373] z-20 shadow-lg after:-z-20 after:w-full after:inset-0 after:rounded-lg transition-all duration-300 hover:transition-all hover:duration-300 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden cursor-pointer after:-translate-y-full after:hover:translate-y-0 [&_p]:delay-200 [&_p]:transition-all">
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { Rate, Tag } from "antd";
-
-//       <img className="rounded-[50px] h-[500px] w-[400px]" src="https://www.thetreecenter.com/c/uploads/2014/06/red-rocket-crape-1-340x453.webp" alt="" />
-//       <p className="cardtxt font-semibold text-gray-400 tracking-wider group-hover:text-gray-700 text-xl">
-//         Calathea Orbifolia
-//       </p>
-//       <p className="blueberry font-semibold text-gray-700 text-xs">
-//         One of Kind & Unique Plants Collection Here at SMKY.
-//       </p>
-//       <div className="ordernow flex flex-row justify-between items-center w-full">
-//         <p className="ordernow-text text-[#abd373] font-semibold group-hover:text-gray-800">
-//           $21.00
-//         </p>
-//         <p className="btun4 lg:inline-flex items-center gap-3 group-hover:bg-white/10 bg-[#abd373] shadow-[10px_10px_150px_#ff9f0d] cursor-pointer py-2 px-4 text-sm font-semibold rounded-full butn">
-//           Order Now
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Card;
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { addCartProduct } from "../../../redux/features/Cart/cartSlice";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import AddToCardButton from "../Button/AddToCardButton";
 
 export type TItem = {
+  _id: string;
   name: string;
   description: string;
   price: number;
@@ -35,63 +19,65 @@ export type TItem = {
   rating: number;
   brand: string;
   status: "OUT-OF-STOCK" | "IN-STOCK";
-  isDeleted: boolean;
 };
 
-// name: string;
-//   description: string;
-//   price: number;
-//   category: TCategory;
-//   stock: number;
-//   image: string;
-//   rating:number;
-//   brand:string;
-//   status: "OUT-OF-STOCK" | "IN-STOCK";  after:bg-[#abd373]
+const Card = ({ item }: { item: any }) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const allCart = useAppSelector((state) => state.cartSlice.CartProducts);
 
-const Card = ({ item }: { item: TItem }) => {
   const {
+    _id,
     name,
     description,
     price,
     category,
-    // stock,
+    stock,
     image,
+
     rating,
     // brand,
     status,
   } = item;
 
   return (
-    <div className="m-2 pb-10 group px-10 py-5 bg-white/10  rounded-lg flex flex-col items-center justify-center gap-2 relative after:absolute after:h-full  after:bg-[black]  z-20 shadow-lg after:-z-20 after:w-full after:inset-0 after:rounded-lg transition-all duration-300 hover:transition-all hover:duration-300 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden  after:-translate-y-full after:hover:translate-y-0 [&_p]:delay-200 [&_p]:transition-all">
-      <div className="flex flex-col  justify-evenly  ">
-        <div className="  mx-auto max-h-[400px] max-w-[350px]">
-          <img className="rounded-[50px]" src={image} alt="" />
-        </div>
+    <div className="flex border-2 p-5 md:px-10 rounded-2xl   flex-col  justify-evenly  ">
+      <div className="  mx-auto max-h-[400px] max-w-[350px]">
+        <img className="rounded-[50px]" src={image} alt="" />
+      </div>
 
-        <div className="mt-3  ">
-          <p className=" font-bold  text-[#4d6429] tracking-wider group-hover:text-white text-3xl">
-            {name}
-          </p>
-          <p className=" font-semibold  text-[#4d6429] tracking-wider group-hover:text-white  text-xl">
-            {category}
-          </p>
-          <p className="blueberry font-semibold mt-4 group-hover:text-white  ">
-            {description}
-          </p>
-          <div className="mt-6 ">
-            <Rate count={5} defaultValue={rating} disabled></Rate>
-            <div className="flex items-center mt-2 gap-3">
-              <p className="text-lg text-[#4d6429]  font-semibold group-hover:text-white">
-                ${price}
-              </p>
-              <p>
-                <Tag className="font-bold">{status}</Tag>
-              </p>
-              <button className=" hover:scale-110 transition delay-125 lg:inline-flex items-center group-hover:text-black text-white gap-3 group-hover:bg-white bg-[#4d6429] shadow-[10px_10px_150px_#4d6429] cursor-pointer py-2 px-4 text-sm font-semibold rounded-full ">
-                Order Now
-              </button>
-            </div>
+      <div className="mt-3  ">
+        <p className=" font-bold  text-[#4d6429] tracking-wider group-hover:text-white text-3xl">
+          {name}
+        </p>
+        <p className=" font-semibold  text-[#4d6429] tracking-wider group-hover:text-white  text-xl">
+          {category}
+        </p>
+        <p className="blueberry font-semibold mt-4 group-hover:text-white  ">
+          {description.toString().substring(0, 100)}....
+        </p>
+        <div className="mt-6 ">
+          <Rate count={5} defaultValue={rating} disabled></Rate>
+          <div className="flex items-center mt-2 gap-3">
+            <p className="text-lg text-[#4d6429]  font-semibold group-hover:text-white">
+              ${price}
+            </p>
+            <p>
+              <Tag className="font-bold">{status}</Tag>
+            </p>
+            <p className="font-bold">Stock: {stock}</p>
+          </div>
+          <div className="flex gap-3 pt-5">
+            <button
+              onClick={() => {
+                navigate(`/product/${item._id}`);
+              }}
+              className=" hover:scale-110 transition delay-125 lg:inline-flex items-center group-hover:text-black text-white gap-3 group-hover:bg-white bg-[#1a5cc0] shadow-[10px_10px_150px_#4d6429] cursor-pointer sm:py-2 px-2 sm:px-4 text-sm font-semibold rounded-full "
+            >
+              Details
+            </button>
            
+            <AddToCardButton item={item}/>
           </div>
         </div>
       </div>
@@ -100,53 +86,3 @@ const Card = ({ item }: { item: TItem }) => {
 };
 
 export default Card;
-
-// card details page info
-
-{
-  /* <div className="m-2 group px-10 py-5 bg-white/10 rounded-lg flex flex-col items-center justify-center gap-2 relative after:absolute after:h-full after:bg-[#4d6429] z-20 shadow-lg after:-z-20 after:w-full after:inset-0 after:rounded-lg transition-all duration-300 hover:transition-all hover:duration-300 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden  after:-translate-y-full after:hover:translate-y-0 [&_p]:delay-200 [&_p]:transition-all">
-<div className="flex flex-col lg:flex-row justify-evenly  lg:gap-5">
-  <div className=" lg:w-1/3 ">
-    <img
-      className="rounded-[50px] mx-auto h-[500px] w-[400px]"
-      src="https://www.thetreecenter.com/c/uploads/2014/06/red-rocket-crape-1-340x453.webp"
-      alt=""
-    />
-  </div>
-
-  <div className="mt-10 lg:mt-24 lg:w-2/3">
-    <p className=" font-bold  text-[#4d6429] tracking-wider group-hover:text-black text-3xl">
-      Calathea Orbifol name
-    </p>
-    <p className=" font-semibold  text-[#4d6429] tracking-wider group-hover:text-black  text-xl">
-      Calathea Orbi category
-    </p>
-    <p className="blueberry font-semibold mt-4 group-hover:text-black  ">
-      One of Kind & Unique Plants Collection Here at SMKY Lorem ipsum
-      dolor sit amet consectetur adipisicing elit. Ullam reiciendis sed
-      eum consequatur earum asperiores quidem, totam ipsam voluptatibus
-      dolorum quod repellendus eaque vitae cumque esse voluptatem. Animi,
-      itaque ea Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-      Dolor iure cum minus maxime odit laboriosam ipsum reiciendis
-      accusantium sequi totam!
-    </p>
-    <div className="mt-6 lg:mt-14">
-      <Rate count={5} defaultValue={5} disabled></Rate>
-      <div className="flex items-center mt-2 gap-3">
-        <p className="text-lg text-[#4d6429]  font-semibold group-hover:text-black">
-          $21.00
-        </p>
-        <p>
-          <Tag className="font-bold">In Stock</Tag>
-        </p>
-      </div>
-      <div className=" flex mt-5 flex-row justify-between items-center w-full">
-        <p className=" lg:inline-flex items-center group-hover:text-black text-white gap-3 group-hover:bg-white/10 bg-[#4d6429] shadow-[10px_10px_150px_#4d6429] cursor-pointer py-2 px-4 text-sm font-semibold rounded-full ">
-          Order Now
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-</div> */
-}

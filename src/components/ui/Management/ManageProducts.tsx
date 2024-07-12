@@ -15,7 +15,7 @@ import UpdateModel from "./UpdateModel";
 const ManageProducts = () => {
   const paginateInfo = useAppSelector((state) => state.paginateSlice);
   const [query, setQuery] = useState<string | undefined>(undefined);
-  const [deleteProduct, { isSuccess }] = useDeleteProductMutation();
+  const [deleteProduct] = useDeleteProductMutation();
   useEffect(() => {
     const query = new URLSearchParams();
     console.log(paginateInfo);
@@ -37,7 +37,7 @@ const ManageProducts = () => {
     setIsModalOpen(false);
   };
 
-  const handleUpdate = (productData:any) => {
+  const handleUpdate = (productData: any) => {
     setModalData(productData);
     showModal();
   };
@@ -53,9 +53,9 @@ const ManageProducts = () => {
       confirmButtonText: "Yes, delete Product!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await deleteProduct(id);
+        const deleteData = await deleteProduct(id);
 
-        if (isSuccess) {
+        if (deleteData.data.success) {
           Swal.fire({
             title: "Deleted!",
             text: "Product has been deleted.",
@@ -112,7 +112,7 @@ const ManageProducts = () => {
           <tbody>
             {data?.data?.map((product: any, ind: number) => {
               return (
-                <tr key={ind} className="bg-[#DCFFCB] border-b">
+                <tr key={ind} className="bg-[#DCFFCB] border-b-2 border-black">
                   <td
                     scope="row"
                     className=" font-medium w-24 h-24 text-gray-900 "

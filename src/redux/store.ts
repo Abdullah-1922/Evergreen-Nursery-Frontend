@@ -1,10 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { baseApi } from "./api/baseApi";
 import paginateSlice from "./features/paginate/paginateSlice";
+import cartSlice from "./features/Cart/cartSlice.ts";
+
 
 export const store = configureStore({
   reducer: {
     paginateSlice: paginateSlice,
+    cartSlice: cartSlice,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

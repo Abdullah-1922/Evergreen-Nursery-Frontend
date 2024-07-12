@@ -16,6 +16,14 @@ export const baseApi = createApi({
         };
       },
     }),
+    getSingleProduct: builder.query({
+      query: (id: any) => {
+        console.log(id, "from query");
+        return {
+          url: `/products/${id}`,
+        };
+      },
+    }),
     createProduct: builder.mutation({
       invalidatesTags: ["product"],
       query: (payload) => {
@@ -29,8 +37,8 @@ export const baseApi = createApi({
     updateProduct: builder.mutation({
       invalidatesTags: ["product"],
       query: (payload) => {
-        const data= payload.data
-        const id =payload.id
+        const data = payload.data;
+        const id = payload.id;
         return {
           url: `/products/${id}`,
           body: data,
@@ -56,4 +64,5 @@ export const {
   useCreateProductMutation,
   useDeleteProductMutation,
   useUpdateProductMutation,
+  useGetSingleProductQuery,
 } = baseApi;

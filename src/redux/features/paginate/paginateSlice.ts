@@ -1,17 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type TInitialState = {
+  page: number;
+  limit: number;
+};
+
+const initialState: TInitialState = {
   page: 1,
   limit: 9,
 };
 
 const paginateSlice = createSlice({
-  name: "paginateSlice",
+  name: "cartSlice",
   initialState,
   reducers: {
     updatePaginateInfo: (state, action) => {
-      state.page = action.payload.page;
       state.limit = action.payload.limit;
+      state.page = action.payload.page;
     },
   },
 });
