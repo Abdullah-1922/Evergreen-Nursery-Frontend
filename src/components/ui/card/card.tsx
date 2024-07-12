@@ -62,41 +62,36 @@ const Card = ({ item }: { item: TItem }) => {
   } = item;
 
   return (
-    <div className="m-2 pb-10 group px-10 py-5 bg-white/10  rounded-lg flex flex-col items-center justify-center gap-2 relative after:absolute after:h-full after:bg-[#D7EEB3] z-20 shadow-lg after:-z-20 after:w-full after:inset-0 after:rounded-lg transition-all duration-300 hover:transition-all hover:duration-300 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden  after:-translate-y-full after:hover:translate-y-0 [&_p]:delay-200 [&_p]:transition-all">
+    <div className="m-2 pb-10 group px-10 py-5 bg-white/10  rounded-lg flex flex-col items-center justify-center gap-2 relative after:absolute after:h-full  after:bg-[black]  z-20 shadow-lg after:-z-20 after:w-full after:inset-0 after:rounded-lg transition-all duration-300 hover:transition-all hover:duration-300 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden  after:-translate-y-full after:hover:translate-y-0 [&_p]:delay-200 [&_p]:transition-all">
       <div className="flex flex-col  justify-evenly  ">
-        <div className="  mx-auto max-h-[500px] max-w-[400px]">
-          <img
-            className="rounded-[50px]"
-            src={image}
-            alt=""
-          />
+        <div className="  mx-auto max-h-[400px] max-w-[350px]">
+          <img className="rounded-[50px]" src={image} alt="" />
         </div>
 
-        <div className="mt-10  ">
-          <p className=" font-bold  text-[#4d6429] tracking-wider group-hover:text-black text-3xl">
+        <div className="mt-3  ">
+          <p className=" font-bold  text-[#4d6429] tracking-wider group-hover:text-white text-3xl">
             {name}
           </p>
-          <p className=" font-semibold  text-[#4d6429] tracking-wider group-hover:text-black  text-xl">
+          <p className=" font-semibold  text-[#4d6429] tracking-wider group-hover:text-white  text-xl">
             {category}
           </p>
-          <p className="blueberry font-semibold mt-4 group-hover:text-black  ">
+          <p className="blueberry font-semibold mt-4 group-hover:text-white  ">
             {description}
           </p>
           <div className="mt-6 ">
             <Rate count={5} defaultValue={rating} disabled></Rate>
             <div className="flex items-center mt-2 gap-3">
-              <p className="text-lg text-[#4d6429]  font-semibold group-hover:text-black">
+              <p className="text-lg text-[#4d6429]  font-semibold group-hover:text-white">
                 ${price}
               </p>
               <p>
                 <Tag className="font-bold">{status}</Tag>
               </p>
-            </div>
-            <div className=" flex mt-5 flex-row justify-between items-center w-full">
-              <p className=" hover:scale-110 transition delay-125 lg:inline-flex items-center group-hover:text-white text-white gap-3 group-hover:bg-black bg-[#4d6429] shadow-[10px_10px_150px_#4d6429] cursor-pointer py-2 px-4 text-sm font-semibold rounded-full ">
+              <button className=" hover:scale-110 transition delay-125 lg:inline-flex items-center group-hover:text-black text-white gap-3 group-hover:bg-white bg-[#4d6429] shadow-[10px_10px_150px_#4d6429] cursor-pointer py-2 px-4 text-sm font-semibold rounded-full ">
                 Order Now
-              </p>
+              </button>
             </div>
+           
           </div>
         </div>
       </div>

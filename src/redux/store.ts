@@ -1,11 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { baseApi } from "./api/baseApi";
+import paginateSlice from "./features/paginate/paginateSlice";
 
 export const store = configureStore({
   reducer: {
-    [baseApi.reducerPath]:baseApi.reducer
+    paginateSlice: paginateSlice,
+    [baseApi.reducerPath]: baseApi.reducer,
   },
-  middleware: getDefaultMiddleware =>getDefaultMiddleware().concat(baseApi.middleware)
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }).concat(
+      baseApi.middleware
+    ),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
