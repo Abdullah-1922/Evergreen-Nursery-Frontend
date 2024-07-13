@@ -112,6 +112,7 @@ const Sidebar = ({ ...props }) => {
                   width: 150,
                 }}
                 onChange={(value) => {
+                  
                   setCategory(value);
                 }}
                 options={categorySelect}

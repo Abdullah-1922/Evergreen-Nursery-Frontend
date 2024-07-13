@@ -1,19 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
-export const plantCategories = [
-  "Default",
-  "Japanese Maple Trees",
-  "Crape Myrtle Trees",
-  "Arborvitae Trees",
-  "Magnolia Trees",
-  "Privacy Trees",
-  "Cherry Laurels",
-  "Barberry",
-  "Hydrangeas",
-  "Wisteria Vines",
-  "Rhododendron",
-  "Juniper Trees",
-  "Perennials",
+export const plantCategories =[
+  'Default',
+  'offices',
+  'home',
+  'outDoor',
+  'garden',
+  'low-water'
 ];
+
 
 export const CategorySelectForm = plantCategories.map((cat) => {
   if (cat == "Default") {

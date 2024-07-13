@@ -4,10 +4,12 @@ import { Content } from "antd/es/layout/layout";
 
 import ManagementSidebar from "../components/ui/sidebar/ManagementSidebar";
 import { Outlet } from "react-router-dom";
+import CartWarning from "../utils/RefreshWarning";
 
 const ManagementPage = () => {
   return (
     <div className="max-w-[1600px] mx-auto">
+       <CartWarning/>
       <Layout className="min-h-screen  bg-white">
         <ManagementSidebar />
 

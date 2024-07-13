@@ -112,13 +112,13 @@ const ManageProducts = () => {
           <tbody>
             {data?.data?.map((product: any, ind: number) => {
               return (
-                <tr key={ind} className="bg-[#DCFFCB] border-b-2 border-black">
+                <tr key={ind} className=" border-b-2 border-black">
                   <td
                     scope="row"
-                    className=" font-medium w-24 h-24 text-gray-900 "
+                    className=" font-medium pl-4  text-gray-900 "
                   >
                     <img
-                      className="   rounded-full "
+                      className="  w-16 h-16 rounded-full "
                       src={product.image}
                       alt={product.name}
                     />

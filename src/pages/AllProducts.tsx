@@ -7,6 +7,8 @@ import Card, { TItem } from "../components/ui/card/Card";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../redux/hooks";
 import PaginationTool from "../components/ui/pagination/Pagination";
+import CartWarning from "../utils/RefreshWarning";
+import {  useSearchParams } from "react-router-dom";
 
 const { Content } = Layout;
 
@@ -19,6 +21,8 @@ const AllProducts = () => {
   const [query, setQuery] = useState<string | undefined>(undefined);
 
   const paginateInfo = useAppSelector((state) => state.paginateSlice);
+  const [userQuery] = useSearchParams();
+  let queryCategoryData = userQuery.get("category");
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -52,6 +56,10 @@ const AllProducts = () => {
     }
     //check category
     if (category) {
+ queryCategoryData =null
+     
+
+
       const categoryForParams = category.replace(/\s+/g, ",");
 
       params.append("category", categoryForParams);
@@ -59,15 +67,20 @@ const AllProducts = () => {
         params.delete("category");
       }
     }
+
+    if(queryCategoryData){
+      params.append('category',queryCategoryData)
+    }
     params.append("page", paginateInfo.page.toString());
     params.append("limit", paginateInfo.limit.toString());
     setQuery(params.toString());
-  }, [maxPrice, minPrice, isStock, priceSerial, category, paginateInfo]);
+  }, [maxPrice, minPrice, isStock, priceSerial, category, paginateInfo,queryCategoryData]);
 
   const { data } = useGetProductsQuery(query);
 
   return (
     <div className="max-w-[1600px] mx-auto">
+      <CartWarning />
       <Layout hasSider className="min-h-screen  bg-white">
         <Sidebar
           setMaxPrice={setMaxPrice}
@@ -83,15 +96,16 @@ const AllProducts = () => {
         <Layout>
           <Navbar />
 
-          <Content  style={{ backgroundColor: "white" }}>
+          <Content style={{ backgroundColor: "white" }}>
             <div
-            className="p-[10px] md:p-[25px] lg:p-[40px]"
-              style={{
-                // padding: 48,
-              }}
+              className="p-[10px] md:p-[25px] lg:p-[40px]"
+           
             >
+              <p className="text-3xl md:text-4xl  font-bold text-center uppercase text-[#4d6429]">
+                All products
+              </p>
               {data?.data.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 xl:grid-cols-3 ">
+                <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 ">
                   {data?.data?.map((item: TItem, ind: number) => (
                     <Card key={ind} item={item} />
                   ))}
