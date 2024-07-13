@@ -33,18 +33,21 @@ const cartSlice = createSlice({
       const existingProduct = state.CartProducts.find(
         (prod) => prod._id == action.payload._id
       );
-      if(existingProduct){
-        state.CartProducts =state.CartProducts.map((prod)=>
-          prod._id === action.payload._id ? {...prod,count: (prod.count || 1) +1}: prod
-        )
-      }else{
-         state.CartProducts.push({ ...action.payload, count: 1 });
+      if (existingProduct) {
+        state.CartProducts = state.CartProducts.map((prod) =>
+          prod._id === action.payload._id
+            ? { ...prod, count: (prod.count || 1) + 1 }
+            : prod
+        );
+      } else {
+        state.CartProducts.push({ ...action.payload, count: 1 });
       }
-        
-     
+    },
+    clearCart: (state) => {
+      state.CartProducts = [];
     },
   },
 });
 
-export const { addCartProduct } = cartSlice.actions;
+export const { addCartProduct, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

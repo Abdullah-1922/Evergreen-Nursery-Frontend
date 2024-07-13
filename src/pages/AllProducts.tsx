@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useAppSelector } from "../redux/hooks";
 import PaginationTool from "../components/ui/pagination/Pagination";
 import CartWarning from "../utils/RefreshWarning";
-import {  useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const { Content } = Layout;
 
@@ -56,9 +56,7 @@ const AllProducts = () => {
     }
     //check category
     if (category) {
- queryCategoryData =null
-     
-
+      queryCategoryData = null;
 
       const categoryForParams = category.replace(/\s+/g, ",");
 
@@ -68,15 +66,29 @@ const AllProducts = () => {
       }
     }
 
-    if(queryCategoryData){
-      params.append('category',queryCategoryData)
+    if (queryCategoryData) {
+      params.append("category", queryCategoryData);
     }
     params.append("page", paginateInfo.page.toString());
     params.append("limit", paginateInfo.limit.toString());
     setQuery(params.toString());
-  }, [maxPrice, minPrice, isStock, priceSerial, category, paginateInfo,queryCategoryData]);
+  }, [
+    maxPrice,
+    minPrice,
+    isStock,
+    priceSerial,
+    category,
+    paginateInfo,
+    queryCategoryData,
+  ]);
 
-  const { data } = useGetProductsQuery(query);
+  const { data, isLoading } = useGetProductsQuery(query);
+
+  if (isLoading) {
+    return (
+      <div className="text-4xl font-bold text-center mt-20">Loading...</div>
+    );
+  }
 
   return (
     <div className="max-w-[1600px] mx-auto">
@@ -97,10 +109,7 @@ const AllProducts = () => {
           <Navbar />
 
           <Content style={{ backgroundColor: "white" }}>
-            <div
-              className="p-[10px] md:p-[25px] lg:p-[40px]"
-           
-            >
+            <div className="p-[10px] md:p-[25px] lg:p-[40px]">
               <p className="text-3xl md:text-4xl  font-bold text-center uppercase text-[#4d6429]">
                 All products
               </p>

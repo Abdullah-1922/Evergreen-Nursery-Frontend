@@ -3,8 +3,10 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <Header className="bg-[#DCFFCB] flex     justify-center items-center h-16">
+    <Header className="bg-[#DCFFCB] flex  justify-center   md:justify-between items-center h-16">
+      <div className="hidden md:flex"><a  href="/"><p className="font-extrabold  font-serif text-lg">AAK_PLANT</p> </a></div>  
       <div className="flex   gap-3 sm:gap-5 md:gap-7 lg:gap-14">
+         
         <NavLink to={"/"}>
           <div className="relative  mt-2">
             <h1 className=" text-sm sm:text-lg md:text-xl lg:text2xl font-bold after:content-[''] after:bg-black after:h-[3px] after:w-[0%] after:left-0 after:-bottom-[5px] after:rounded-xl after:duration-300 after:absolute hover:after:w-[100%] ">
