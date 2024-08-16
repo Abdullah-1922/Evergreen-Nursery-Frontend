@@ -1,12 +1,55 @@
+// import { Header } from "antd/es/layout/layout";
+// import { useEffect, useState } from "react";
+// import { NavLink } from "react-router-dom";
+
 import { Header } from "antd/es/layout/layout";
 import { NavLink } from "react-router-dom";
 
+// const MainNavbar = () => {
+//   return (
+//     <div className="bg-blue-500 h-32  max-w-[1400px] mx-auto">
+//       {/* Your main navbar content */}
+//     </div>
+//   );
+// };
+
+// const SecondaryNavbar = () => {
+//   return (
+//     <div className="bg-green-500 h-24 max-w-[1400px] mx-auto">
+//       {/* Your secondary navbar content */}
+//     </div>
+//   );
+// };
+
 const Navbar = () => {
+  // const [showSecondaryNavbar, setShowSecondaryNavbar] = useState(false);
+  // const [scrollPosition, setScrollPosition] = useState(0);
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScrollPosition(window.scrollY);
+  //     if (window.scrollY > 60) {
+  //       setShowSecondaryNavbar(true);
+  //     } else {
+  //       setShowSecondaryNavbar(false);
+  //     }
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
   return (
     <Header className="bg-[#DCFFCB] flex  justify-center   md:justify-between items-center h-16">
-      <div className="hidden md:flex"><a  href="/"><p className="font-extrabold  font-serif text-lg">AAK_PLANT</p> </a></div>  
+      <div className="hidden md:flex">
+        <a href="/">
+          <p className="font-extrabold  font-serif text-lg">AAK_PLANT</p>{" "}
+        </a>
+      </div>
       <div className="flex   gap-3 sm:gap-5 md:gap-7 lg:gap-14">
-         
         <NavLink to={"/"}>
           <div className="relative  mt-2">
             <h1 className=" text-sm sm:text-lg md:text-xl lg:text2xl font-bold after:content-[''] after:bg-black after:h-[3px] after:w-[0%] after:left-0 after:-bottom-[5px] after:rounded-xl after:duration-300 after:absolute hover:after:w-[100%] ">
@@ -36,6 +79,28 @@ const Navbar = () => {
         </NavLink>
       </div>
     </Header>
+
+    // <div className=" flex justify-center max-w-[1280px] mx-auto  ">
+    //   <div
+    //     className={`fixed w-full ${
+    //       showSecondaryNavbar
+    //         ? "-translate-y-32 transition-transform duration-500"
+    //         : "translate-y-0"
+    //     }`}
+    //     style={{ transition: showSecondaryNavbar ? "transform 0.5s" : "none" }}
+    //   >
+    //     <MainNavbar />
+    //   </div>
+    //   <div
+    //     className={`fixed w-full transition-transform ${
+    //       showSecondaryNavbar
+    //         ? "transform translate-y-0 duration-700"
+    //         : "transform -translate-y-24 duration-0"
+    //     }`}
+    //   >
+    //     <SecondaryNavbar />
+    //   </div>
+    // </div>
   );
 };
 

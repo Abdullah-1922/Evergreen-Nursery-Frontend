@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  useDeleteProductMutation,
-  useGetProductsQuery,
-} from "../../../redux/api/baseApi";
+
 
 import { useAppSelector } from "../../../redux/hooks";
 
@@ -11,6 +8,7 @@ import PaginationTool from "../pagination/Pagination";
 import { Button } from "antd";
 import Swal from "sweetalert2";
 import UpdateModel from "./UpdateModel";
+import { useDeleteProductMutation, useGetProductsQuery } from "../../../redux/product/productApi";
 
 const ManageProducts = () => {
   const paginateInfo = useAppSelector((state) => state.paginateSlice);

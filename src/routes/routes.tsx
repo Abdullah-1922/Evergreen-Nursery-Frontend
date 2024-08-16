@@ -8,6 +8,7 @@ import CartPage from "../pages/CartPage";
 import MainLayout from "../components/layout/MainLayout";
 import Homepage from "../pages/Homepage";
 import CardDetailPage from '../components/ui/card/CardDetailsPage';
+import ManageCategory from '../components/ui/Management/ManageCategory';
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "manage-products",
         element: <ManageProducts />,
+      },
+      {
+        path: "manage-category",
+        element: <ManageCategory/>,
       },
       {
         index: true,

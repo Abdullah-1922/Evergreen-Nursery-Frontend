@@ -7,9 +7,10 @@ import {
 
 import Swal from "sweetalert2";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { useGetProductsQuery } from "../../../redux/api/baseApi";
+
 import { useNavigate } from "react-router-dom";
 import { addCartProduct } from "../../../redux/features/Cart/cartSlice";
+import { useGetProductsQuery } from "../../../redux/product/productApi";
 
 const HomePageCards = () => {
   const allCart = useAppSelector((state) => state.cartSlice.CartProducts);
@@ -69,6 +70,7 @@ const HomePageCards = () => {
                       if (prod.stock == 0) {
                         return Swal.fire({
                           title: "Product is out of stock",
+
                           icon: "error",
                           confirmButtonText: "Back",
                         });

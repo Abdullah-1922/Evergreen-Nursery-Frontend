@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Empty, Layout } from "antd";
 import "../styles/layoutMenu.css";
 import Navbar from "../components/ui/navbar/Navbar";
-import { useGetProductsQuery } from "../redux/api/baseApi";
+
 import Sidebar from "../components/ui/sidebar/AllProductSidebar";
 import Card, { TItem } from "../components/ui/card/Card";
 import { useEffect, useState } from "react";
@@ -9,6 +10,7 @@ import { useAppSelector } from "../redux/hooks";
 import PaginationTool from "../components/ui/pagination/Pagination";
 import CartWarning from "../utils/RefreshWarning";
 import { useSearchParams } from "react-router-dom";
+import { useGetProductsQuery } from "../redux/product/productApi";
 
 const { Content } = Layout;
 
@@ -18,12 +20,21 @@ const AllProducts = () => {
   const [isStock, setIsStock] = useState(false);
   const [priceSerial, setPriceSerial] = useState("default");
   const [category, setCategory] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [query, setQuery] = useState<string | undefined>(undefined);
 
   const paginateInfo = useAppSelector((state) => state.paginateSlice);
   const [userQuery] = useSearchParams();
-  let queryCategoryData = userQuery.get("category");
 
+  let queryCategoryData = userQuery.get("category");
+  console.log(queryCategoryData);
+  useEffect(() => {
+    if (queryCategoryData) {
+      setCategory(queryCategoryData);
+    }
+  }, [queryCategoryData, category]);
+
+  console.log(category);
   useEffect(() => {
     const params = new URLSearchParams();
     //check max price
@@ -61,6 +72,7 @@ const AllProducts = () => {
       const categoryForParams = category.replace(/\s+/g, ",");
 
       params.append("category", categoryForParams);
+
       if (category == "Default") {
         params.delete("category");
       }
@@ -68,6 +80,9 @@ const AllProducts = () => {
 
     if (queryCategoryData) {
       params.append("category", queryCategoryData);
+    }
+    if (searchQuery) {
+      params.append("searchTerm", searchQuery);
     }
     params.append("page", paginateInfo.page.toString());
     params.append("limit", paginateInfo.limit.toString());
@@ -80,8 +95,10 @@ const AllProducts = () => {
     category,
     paginateInfo,
     queryCategoryData,
+    searchQuery,
   ]);
 
+  console.log(searchQuery);
   const { data, isLoading } = useGetProductsQuery(query);
 
   if (isLoading) {
@@ -110,9 +127,24 @@ const AllProducts = () => {
 
           <Content style={{ backgroundColor: "white" }}>
             <div className="p-[10px] md:p-[25px] lg:p-[40px]">
-              <p className="text-3xl md:text-4xl  font-bold text-center uppercase text-[#4d6429]">
-                All products
+              <p className="text-3xl md:text-4xl uppercase font-bold text-center  text-[#4d6429]">
+                {category === "" || category == "Default"
+                  ? "All products"
+                  : `All products ( ${category}) `}
               </p>
+              <div className="w-2/3 mx-auto mt-10  ">
+                <form>
+                  <input
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    id="searchInput"
+                    name="searchInput"
+                    className="bg-[#dcffcb] px-3 py-1 w-full border rounded-md text-2xl placeholder:text-[#4d6429] placeholder:p-3"
+                    placeholder="Search Item"
+                    type="text"
+                  />
+                </form>
+              </div>
+
               {data?.data.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 ">
                   {data?.data?.map((item: TItem, ind: number) => (

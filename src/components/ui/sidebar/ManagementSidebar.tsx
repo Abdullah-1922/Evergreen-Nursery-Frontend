@@ -25,6 +25,11 @@ const ManagementSidebar = () => {
               Create Product
             </Button>
           </NavLink>
+          <NavLink to={"/management/manage-category"}>
+            <Button className="w-full font-bold h-[40px] text-lg   ">
+              Manage Category
+            </Button>
+          </NavLink>
         </div>
       </div>
     </Sider>

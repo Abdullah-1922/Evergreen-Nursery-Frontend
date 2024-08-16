@@ -1,11 +1,13 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { CategorySelectForm } from "../sidebar/sidebar.constant";
-import { useCreateProductMutation } from "../../../redux/api/baseApi";
+import { CategorySelectForm } from '../sidebar/sidebar.constant';
+
 
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { useCreateProductMutation } from "../../../redux/product/productApi";
 
 export type Inputs = {
-  name: string;
+name: string;
   category: string;
   rating: number;
   image: string;
@@ -13,7 +15,9 @@ export type Inputs = {
   description: string;
   price: number;
   brand: string;
-};
+}
+;
+
 
 const CreateProduct = () => {
   const [createProduct, { error, isLoading }] = useCreateProductMutation();
@@ -23,7 +27,7 @@ const CreateProduct = () => {
 
     formState: { errors },
   } = useForm<Inputs>();
-
+const navigate=useNavigate()
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const res = await createProduct({
       ...data,
@@ -34,6 +38,7 @@ const CreateProduct = () => {
     console.log(res);
 
     if (res.data.data._id) {
+  navigate('/products')
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -89,7 +94,7 @@ const CreateProduct = () => {
               {...register("category", { required: true })}
               className="mt-1  text-lg border-2 py-1  pl-3 rounded-xl   block w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             >
-              {CategorySelectForm}
+              <CategorySelectForm/>
             </select>
             {errors.category && (
               <span className="text-red-500">Category is required</span>

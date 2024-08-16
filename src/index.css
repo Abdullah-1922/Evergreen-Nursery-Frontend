@@ -14,3 +14,10 @@
   .absolute.inset-0 img {
     object-fit: cover;
   }
+  .primary-navbar {
+    @apply transition-transform;
+  }
+  
+  .sticky-navbar {
+    @apply transition-transform;
+  }

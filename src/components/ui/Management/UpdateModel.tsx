@@ -2,9 +2,10 @@
 import { Button, Modal } from "antd";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { useUpdateProductMutation } from "../../../redux/api/baseApi";
+
 import { Inputs } from "./CreateProduct";
 import { CategorySelectForm } from "../sidebar/sidebar.constant";
+import { useUpdateProductMutation } from "../../../redux/product/productApi";
 
 const UpdateModel = ({
   isModalOpen,

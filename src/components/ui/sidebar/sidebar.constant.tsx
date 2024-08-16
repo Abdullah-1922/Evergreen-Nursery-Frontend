@@ -1,25 +1,42 @@
-/* eslint-disable react-refresh/only-export-components */
-export const plantCategories =[
-  'Default',
-  'offices',
-  'home',
-  'outDoor',
-  'garden',
-  'low-water'
-];
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ReactNode } from "react";
+import { useGetCategoryQuery } from "../../../redux/features/Category/categoryApi";
 
+export const CategorySelectForm = (): ReactNode => {
+  const { data, isLoading, isError } = useGetCategoryQuery(undefined);
+  
 
-export const CategorySelectForm = plantCategories.map((cat) => {
-  if (cat == "Default") {
-    return;
+  if (isLoading) {
+    return <option>Loading categories...</option>;
   }
-  return <option value={cat}>{cat}</option>;
-});
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const categorySelect = plantCategories.map((category) => {
-  return {
+  
+  if (isError || !data?.data[0].category?.length) {
+    return <option>No categories available</option>;
+  }
+
+  return data?.data[0].category.map((cat: string) => (
+    <option key={cat} value={cat}>
+      {cat}
+    </option>
+  ));
+};
+
+export const useCategoryOptions = () => {
+  const { data, isLoading, isError } = useGetCategoryQuery(undefined);
+
+  if (isLoading) {
+    return [{ value: "", label: "Loading categories..." }];
+  }
+
+  if (isError || !data?.data[0]?.category?.length) {
+    return [{ value: "", label: "No categories available" }];
+  }
+
+  const categories = ['Default',...data.data[0].category];
+
+  return categories.map((category: string) => ({
     value: category,
     label: category.toUpperCase(),
-  };
-});
+  }));
+};

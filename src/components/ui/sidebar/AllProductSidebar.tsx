@@ -1,6 +1,7 @@
 import { Checkbox, Flex, Radio, Select, Slider } from "antd";
 import Sider from "antd/es/layout/Sider";
-import { categorySelect } from "./sidebar.constant";
+import { useCategoryOptions } from "./sidebar.constant";
+
 
 const Sidebar = ({ ...props }) => {
   const {
@@ -15,6 +16,9 @@ const Sidebar = ({ ...props }) => {
   } = props;
   const numMinValue = Number(minPrice) === 0 ? undefined : Number(minPrice);
   const numMaxValue = Number(maxPrice) === 0 ? undefined : Number(maxPrice);
+ console.log(setCategory);
+
+ const categoryOptions = useCategoryOptions();
 
   return (
     <Sider
@@ -115,7 +119,7 @@ const Sidebar = ({ ...props }) => {
                   
                   setCategory(value);
                 }}
-                options={categorySelect}
+                options={categoryOptions}
               />
             </div>
           </div>

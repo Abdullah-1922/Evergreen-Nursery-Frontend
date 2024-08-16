@@ -1,8 +1,8 @@
 import { Rate, Tag } from "antd";
 
 import { useParams } from "react-router-dom";
-import { useGetSingleProductQuery } from "../../../redux/api/baseApi";
 import AddToCardButton from "../Button/AddToCardButton";
+import { useGetSingleProductQuery } from "../../../redux/product/productApi";
 
 export type TItem = {
   name: string;

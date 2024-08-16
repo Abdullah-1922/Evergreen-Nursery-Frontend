@@ -22,29 +22,25 @@ export type TItem = {
 const Card = ({ item }: { item: any }) => {
   const navigate = useNavigate();
 
-  const {
-    _id,
-    name,
-
-    price,
-
-    stock,
-    image,
-    rating,
-    status,
-  } = item;
+  const { _id, name, price, stock, image, rating, status } = item;
 
   return (
     <div className=" py-10 flex  items-center justify-center">
       <div className="bg-white rounded-lg overflow-hidden shadow-2xl  ">
         <img
-          className="h-[250px] w-full object-cover object-end"
+          className="h-[250px]  w-[300px] sm:w-[390px]    object-cover object-end"
           src={image}
           alt={name}
         />
         <div className="p-6">
           <div className="flex items-baseline">
-            <span className={`inline-block   py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide ${stock === 0 ? 'bg-red-500 text-white': 'bg-[#dcffcb] text-black'}`}>
+            <span
+              className={`inline-block   py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide ${
+                stock === 0
+                  ? "bg-red-500 text-white"
+                  : "bg-[#dcffcb] text-black"
+              }`}
+            >
               {status === "IN-STOCK" ? "Available" : "Out of Stock"}
             </span>
             <div className="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
@@ -60,7 +56,6 @@ const Card = ({ item }: { item: any }) => {
           </div>
           <div className="mt-2 flex items-center">
             <Rate count={5} defaultValue={rating} disabled></Rate>
-            
           </div>
           <div className="mt-4 flex gap-3">
             <button
